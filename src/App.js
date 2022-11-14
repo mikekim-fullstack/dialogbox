@@ -30,15 +30,15 @@ export default function App() {
     message: "",
     isLoading: false,
     //Update
-    nameProduct: ""
+    itemName: ""
   });
   const idProductRef = useRef();
-  const handleDialog = (message, isLoading, nameProduct) => {
+  const handleDialog = (message, isLoading, itemName) => {
     setDialog({
       message,
       isLoading,
       //Update
-      nameProduct
+      itemName
     });
   };
 
@@ -94,7 +94,7 @@ export default function App() {
       {dialog.isLoading && (
         <DialogBox
           //Update
-          nameProduct={dialog.nameProduct}
+          itemName={dialog.itemName}
           onDialog={areUSureDelete}
           message={dialog.message}
         />

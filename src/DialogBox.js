@@ -1,64 +1,30 @@
-function DialogBox({ message, onDialog, nameProduct }) {
+import './DialogBox.css'
+function DialogBox({ message, onDialog, itemName }) {
+    const clickedContent = (e) => {
+        console.log('clickedContent')
+        e.stopPropagation()
+    }
     return (
-        <div
-            style={{
-                position: "fixed",
-                top: "0",
-                left: "0",
-                right: "0",
-                bottom: "0",
-                backgroundColor: "rgba(0,0,0,0.5)"
-            }}
-            onClick={() => onDialog(false)}
-        >
-            <div
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%,-50%)",
-                    background: "white",
-                    padding: "20px",
-                    borderRadius: "10px"
-                }}
-            >
-                <h3 stlye={{ color: "#111", fontSize: "16px" }}>{message}</h3>
-                <h1 style={{ color: "blue", fontSize: "24px" }}>{nameProduct}</h1>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                    <button
-                        onClick={() => onDialog(true)}
-                        style={{
-                            background: "red",
-                            color: "white",
-                            padding: "10px",
-                            marginRight: "4px",
-                            border: "none",
-                            cursor: "pointer"
-                        }}
-                    >
+        <div className='dialogbox__view' onClick={() => onDialog(false)} >
+            {/* <div className='content' onClick={(e) => e.stopPropagation()} > */}
+            <div className='content' onClick={(e) => clickedContent(e)} >
+                <div className='close' onClick={() => onDialog(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M6.4 18.65 5.35 17.6l5.6-5.6-5.6-5.6L6.4 5.35l5.6 5.6 5.6-5.6 1.05 1.05-5.6 5.6 5.6 5.6-1.05 1.05-5.6-5.6Z" /></svg>
+                </div>
+                <div className='message-group'>
+                    <h3 className='message' >{message}</h3>
+                    <h1 className='item-name'>{itemName}</h1>
+                </div>
+                <div className='btn-group' style={{ display: "flex", alignItems: "center" }}>
+                    <button className='btn-ok' onClick={() => onDialog(true)}>
                         Yes
                     </button>
-                    <button
-                        onClick={() => onDialog(false)}
-                        style={{
-                            background: "green",
-                            color: "white",
-                            padding: "10px",
-                            marginLeft: "4px",
-                            border: "none",
-                            cursor: "pointer"
-                        }}
-                    >
-                        No
+                    <button className='btn-cancel' onClick={() => onDialog(false)} >
+                        Cancel
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 export default DialogBox;

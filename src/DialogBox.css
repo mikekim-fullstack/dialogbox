@@ -1,0 +1,86 @@
+.dialogbox__view {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.dialogbox__view .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffef4a;
+
+
+    border-radius: 7px;
+    border: 1px solid rgb(207, 207, 207);
+}
+
+.dialogbox__view .content .close {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    /* border: 1px solid #e5e5e5; */
+    margin-top: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.dialogbox__view .content svg {
+    fill: rgb(118, 99, 99);
+}
+
+.dialogbox__view .content .message-group {
+    padding: 10px 40px;
+}
+
+.dialogbox__view .content .message {
+    color: rgb(46, 44, 88);
+    font-size: 1.2rem;
+}
+
+.dialogbox__view .content .item-name {
+    color: rgb(255, 72, 0);
+    font-size: 1.7rem;
+}
+
+.dialogbox__view .btn-group {
+    background-color: #fff;
+    width: 100%;
+    padding: 20px 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    border-radius: 0 0 6.5px 6.5px;
+}
+
+.dialogbox__view .btn-group button {
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+
+}
+
+.dialogbox__view .btn-group .btn-ok {
+    background-color: red;
+    /* margin-right: 10; */
+    ;
+}
+
+.dialogbox__view .btn-group .btn-cancel {
+    background-color: green;
+    margin-left: 10px;
+}
