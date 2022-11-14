@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import "./styles.css";
-import Dialog from "./Dialog";
+import DialogBox from "./DialogBox";
 
 const data = [
   {
@@ -92,7 +92,7 @@ export default function App() {
         </div>
       ))}
       {dialog.isLoading && (
-        <Dialog
+        <DialogBox
           //Update
           nameProduct={dialog.nameProduct}
           onDialog={areUSureDelete}
