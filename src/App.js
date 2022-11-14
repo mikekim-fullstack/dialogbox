@@ -1,25 +1,104 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useRef } from "react";
+import "./styles.css";
+import Dialog from "./Dialog";
 
-function App() {
+const data = [
+  {
+    id: 1,
+    name: "IphoneX",
+    img:
+      "https://didongviet.vn/pub/media/catalog/product//i/p/iphone-x-mau-xam-didongviet.jpg"
+  },
+  {
+    id: 2,
+    name: "Samsung Fold",
+    img:
+      "https://images.samsung.com/pk/smartphones/galaxy-z-fold3-5g/buy/zfold3_carousel_mainsinglekv_mo.jpg"
+  },
+  {
+    id: 3,
+    name: "Laptop Gaming",
+    img:
+      "https://cdn.techzones.vn/Data/Sites/1/News/3285/techzones-nhung-mau-laptop-gaming-choi-game-co-tan-nhiet-tot-nhat-tren-thi-truong.jpg"
+  }
+];
+export default function App() {
+  const [products, setProducts] = useState(data);
+
+  //You can put all product information into diaglog
+  const [dialog, setDialog] = useState({
+    message: "",
+    isLoading: false,
+    //Update
+    nameProduct: ""
+  });
+  const idProductRef = useRef();
+  const handleDialog = (message, isLoading, nameProduct) => {
+    setDialog({
+      message,
+      isLoading,
+      //Update
+      nameProduct
+    });
+  };
+
+  const handleDelete = (id) => {
+    //Update
+    const index = data.findIndex((p) => p.id === id);
+
+    handleDialog("Are you sure you want to delete?", true, data[index].name);
+    idProductRef.current = id;
+  };
+
+  const areUSureDelete = (choose) => {
+    if (choose) {
+      setProducts(products.filter((p) => p.id !== idProductRef.current));
+      handleDialog("", false);
+    } else {
+      handleDialog("", false);
+    }
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      {products.map((p) => (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <h3>{p.name}</h3>
+          <img
+            style={{ objectFit: "cover", width: "100px", height: "100px" }}
+            src={p.img}
+            alt={p.name}
+          />
+          <button
+            onClick={() => handleDelete(p.id)}
+            style={{
+              marginTop: "10px",
+              background: "red",
+              fontWeight: "bolder",
+              border: "none",
+              padding: "8px",
+              cursor: "pointer",
+              color: "white",
+              borderRadius: "8px"
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      ))}
+      {dialog.isLoading && (
+        <Dialog
+          //Update
+          nameProduct={dialog.nameProduct}
+          onDialog={areUSureDelete}
+          message={dialog.message}
+        />
+      )}
     </div>
   );
 }
-
-export default App;
